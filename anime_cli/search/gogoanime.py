@@ -31,10 +31,7 @@ class GogoAnime(SearchApi):
 
         # Find all the ul tag which have an id of episode_page
         episode_page = soup.find("ul", {"id": "episode_page"})
-        # From the ul tag find all the elements having li tag and then get ep_end
-        # from the last li tag which is the total number of episodes
-        episode_count = int(episode_page.find_all("li")[-1].a["ep_end"])
-        return episode_count
+        return int(episode_page.find_all("li")[-1].a["ep_end"])
 
     def get_embed_video(self, anime: Anime, episode: int) -> str:
         soup = self.get_soup(f"{anime.id}-episode-{episode}")
